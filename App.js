@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { View, ActivityIndicator, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,6 +23,9 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import MapScreen from './src/screens/MapScreen';
 import ETAScreen from './src/screens/ETAScreen';
+import BusListScreen from './src/screens/BusListScreen';
+import BusDetailsScreen from './src/screens/BusDetailsScreen';
+import AddBusScreen from './src/screens/AddBusScreen';
 
 // Import context
 import { AuthProvider, useAuth } from './src/context/AuthContext';
@@ -321,10 +325,4 @@ async function registerForPushNotificationsAsync() {
   console.log('Expo push token:', token);
 
   return token;
-}
-
-// Import missing components
-import { View, ActivityIndicator, Platform } from 'react-native';
-import BusListScreen from './src/screens/BusListScreen';
-import BusDetailsScreen from './src/screens/BusDetailsScreen';
-import AddBusScreen from './src/screens/AddBusScreen'; 
+} 

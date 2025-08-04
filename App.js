@@ -7,7 +7,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import * as SecureStore from 'expo-secure-store';
 import * as Notifications from 'expo-notifications';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from 'react-native-vector-icons/Ionicons';
 
 // Import screens
 import LoginScreen from './src/screens/LoginScreen';

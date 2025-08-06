@@ -1,27 +1,21 @@
 import { DefaultTheme } from 'react-native-paper';
 
+// Create a simple, compatible theme
 export const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     primary: '#1976D2',
-    primaryDark: '#1565C0',
-    primaryLight: '#42A5F5',
     secondary: '#FF6B35',
-    secondaryDark: '#E55A2B',
-    secondaryLight: '#FF8A65',
     background: '#F5F5F5',
     surface: '#FFFFFF',
     error: '#D32F2F',
     warning: '#F57C00',
     success: '#388E3C',
-    info: '#1976D2',
     text: '#212121',
     textSecondary: '#757575',
-    textDisabled: '#BDBDBD',
     border: '#E0E0E0',
     divider: '#EEEEEE',
-    overlay: 'rgba(0, 0, 0, 0.5)',
     // Bus status colors
     busActive: '#4CAF50',
     busInactive: '#9E9E9E',
@@ -35,6 +29,7 @@ export const theme = {
     trafficModerate: '#FF9800',
     trafficHeavy: '#F44336',
   },
+  // Spacing values
   spacing: {
     xs: 4,
     sm: 8,
@@ -43,6 +38,7 @@ export const theme = {
     xl: 32,
     xxl: 48,
   },
+  // Border radius values
   borderRadius: {
     sm: 4,
     md: 8,
@@ -50,90 +46,42 @@ export const theme = {
     xl: 16,
     round: 50,
   },
-  typography: {
-    h1: {
-      fontSize: 32,
-      fontWeight: 'bold',
-      lineHeight: 40,
-    },
-    h2: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      lineHeight: 32,
-    },
-    h3: {
-      fontSize: 20,
-      fontWeight: '600',
-      lineHeight: 28,
-    },
-    h4: {
-      fontSize: 18,
-      fontWeight: '600',
-      lineHeight: 24,
-    },
-    h5: {
-      fontSize: 16,
-      fontWeight: '600',
-      lineHeight: 20,
-    },
-    body1: {
-      fontSize: 16,
-      lineHeight: 24,
-    },
-    body2: {
-      fontSize: 14,
-      lineHeight: 20,
-    },
-    caption: {
-      fontSize: 12,
-      lineHeight: 16,
-    },
-    button: {
-      fontSize: 14,
-      fontWeight: '600',
-      textTransform: 'uppercase',
-    },
-  },
+  // Simple shadows without complex references
   shadows: {
     small: {
       shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
+      shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 3.84,
       elevation: 5,
     },
     medium: {
       shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
+      shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.15,
       shadowRadius: 6.27,
       elevation: 10,
     },
     large: {
       shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 6,
-      },
+      shadowOffset: { width: 0, height: 6 },
       shadowOpacity: 0.2,
       shadowRadius: 8.84,
       elevation: 15,
     },
   },
-  // Custom styles for common components
+  // Custom styles
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 16,
-    ...DefaultTheme.shadows.small,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   button: {
     primary: {
@@ -235,7 +183,7 @@ export const theme = {
   },
 };
 
-// Helper functions for common styles
+// Helper functions
 export const createStyles = (styles) => styles;
 
 export const getStatusColor = (status) => {

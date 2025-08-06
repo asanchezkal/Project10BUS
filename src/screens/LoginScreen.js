@@ -17,7 +17,6 @@ import {
   Divider,
   ActivityIndicator,
 } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
 import { theme } from '../theme/theme';
@@ -57,10 +56,7 @@ const LoginScreen = ({ navigation }) => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <LinearGradient
-        colors={[theme.colors.primary, theme.colors.primaryDark]}
-        style={styles.gradient}
-      >
+      <View style={styles.gradient}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           {/* Header */}
           <View style={styles.header}>
@@ -100,7 +96,7 @@ const LoginScreen = ({ navigation }) => {
                 left={<TextInput.Icon icon="lock" />}
                 right={
                   <TextInput.Icon
-                    icon={showPassword ? "eye-off" : "eye"}
+                    icon={showPassword ? 'eye-off' : 'eye'}
                     onPress={() => setShowPassword(!showPassword)}
                   />
                 }
@@ -109,75 +105,41 @@ const LoginScreen = ({ navigation }) => {
               <Button
                 mode="contained"
                 onPress={handleLogin}
-                style={styles.loginButton}
-                disabled={isLoading}
                 loading={isLoading}
+                disabled={isLoading}
+                style={styles.loginButton}
+                contentStyle={styles.buttonContent}
               >
-                {isLoading ? 'Signing In...' : 'Sign In'}
+                Sign In
               </Button>
 
               <Divider style={styles.divider} />
 
-              <View style={styles.roleInfo}>
-                <Text style={styles.roleTitle}>Login for:</Text>
-                <View style={styles.roleList}>
-                  <View style={styles.roleItem}>
-                    <Ionicons name="school" size={20} color={theme.colors.primary} />
-                    <Text style={styles.roleText}>School Administrators</Text>
-                  </View>
-                  <View style={styles.roleItem}>
-                    <Ionicons name="car" size={20} color={theme.colors.primary} />
-                    <Text style={styles.roleText}>Bus Drivers</Text>
-                  </View>
-                  <View style={styles.roleItem}>
-                    <Ionicons name="people" size={20} color={theme.colors.primary} />
-                    <Text style={styles.roleText}>Parents</Text>
-                  </View>
-                </View>
+              <View style={styles.registerContainer}>
+                <Paragraph>Don't have an account? </Paragraph>
+                <Button
+                  mode="text"
+                  onPress={() => navigation.navigate('Register')}
+                  style={styles.registerButton}
+                >
+                  Sign Up
+                </Button>
               </View>
 
-              <Divider style={styles.divider} />
-
-              <View style={styles.registerSection}>
-                <Text style={styles.registerText}>New to School Bus Tracker?</Text>
+              <View style={styles.roleButtons}>
                 <Button
                   mode="outlined"
                   onPress={handleRegisterSchool}
-                  style={styles.registerButton}
+                  style={styles.roleButton}
+                  icon="school"
                 >
-                  Register Your School
+                  Register as School
                 </Button>
-                <Text style={styles.registerNote}>
-                  Contact your school administrator for driver and parent accounts
-                </Text>
               </View>
             </Card.Content>
           </Card>
-
-          {/* Features */}
-          <View style={styles.featuresContainer}>
-            <Title style={styles.featuresTitle}>Key Features</Title>
-            <View style={styles.featuresGrid}>
-              <View style={styles.featureItem}>
-                <Ionicons name="location" size={30} color={theme.colors.primary} />
-                <Text style={styles.featureText}>Real-time Tracking</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Ionicons name="notifications" size={30} color={theme.colors.primary} />
-                <Text style={styles.featureText}>ETA Notifications</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Ionicons name="map" size={30} color={theme.colors.primary} />
-                <Text style={styles.featureText}>Route Management</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Ionicons name="shield-checkmark" size={30} color={theme.colors.primary} />
-                <Text style={styles.featureText}>Secure & Reliable</Text>
-              </View>
-            </View>
-          </View>
         </ScrollView>
-      </LinearGradient>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -188,15 +150,16 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
+    backgroundColor: theme.colors.primary,
   },
   scrollContent: {
     flexGrow: 1,
-    paddingVertical: theme.spacing.lg,
+    justifyContent: 'center',
+    padding: theme.spacing.lg,
   },
   header: {
     alignItems: 'center',
-    paddingHorizontal: theme.spacing.lg,
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.lg,
   },
   logoContainer: {
     width: 120,
@@ -208,7 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.lg,
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -216,103 +179,55 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
     lineHeight: 24,
   },
   loginCard: {
-    marginHorizontal: theme.spacing.lg,
-    marginBottom: theme.spacing.xl,
     borderRadius: theme.borderRadius.lg,
     elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   cardTitle: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: theme.colors.primary,
     textAlign: 'center',
     marginBottom: theme.spacing.lg,
-    color: theme.colors.text,
   },
   input: {
-    marginBottom: theme.spacing.md,
+    marginBottom: theme.spacing.lg,
+    backgroundColor: 'white',
   },
   loginButton: {
-    marginTop: theme.spacing.md,
-    marginBottom: theme.spacing.lg,
-    paddingVertical: theme.spacing.sm,
+    marginTop: theme.spacing.sm,
     borderRadius: theme.borderRadius.md,
+    backgroundColor: theme.colors.primary,
+  },
+  buttonContent: {
+    paddingVertical: theme.spacing.sm,
   },
   divider: {
     marginVertical: theme.spacing.lg,
   },
-  roleInfo: {
-    marginBottom: theme.spacing.lg,
-  },
-  roleTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: theme.spacing.md,
-    color: theme.colors.text,
-  },
-  roleList: {
-    gap: theme.spacing.sm,
-  },
-  roleItem: {
+  registerContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: theme.spacing.sm,
-  },
-  roleText: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-  },
-  registerSection: {
-    alignItems: 'center',
-  },
-  registerText: {
-    fontSize: 16,
-    marginBottom: theme.spacing.md,
-    color: theme.colors.text,
+    marginBottom: theme.spacing.lg,
   },
   registerButton: {
-    marginBottom: theme.spacing.md,
-    borderRadius: theme.borderRadius.md,
+    marginLeft: theme.spacing.xs,
   },
-  registerNote: {
-    fontSize: 12,
-    color: theme.colors.textSecondary,
-    textAlign: 'center',
-    lineHeight: 18,
+  roleButtons: {
+    marginTop: theme.spacing.sm,
   },
-  featuresContainer: {
-    paddingHorizontal: theme.spacing.lg,
-  },
-  featuresTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: theme.spacing.lg,
-    color: 'white',
-  },
-  featuresGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    gap: theme.spacing.md,
-  },
-  featureItem: {
-    width: '48%',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: theme.borderRadius.md,
-    padding: theme.spacing.md,
-    alignItems: 'center',
-    gap: theme.spacing.sm,
-  },
-  featureText: {
-    fontSize: 12,
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: '500',
+  roleButton: {
+    marginBottom: theme.spacing.sm,
+    borderColor: theme.colors.primary,
   },
 });
 
